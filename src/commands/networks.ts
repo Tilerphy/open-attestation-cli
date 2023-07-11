@@ -22,7 +22,8 @@ export enum NetworkCmdName {
 const defaultInfuraProvider =
   (networkName: string): (() => providers.Provider) =>
   () =>
-    new providers.InfuraProvider(networkName);
+	new providers.AlchemyProvider(networkName, "");
+    //new providers.InfuraProvider(networkName, "");
 
 const jsonRpcProvider =
   (url: string): (() => providers.Provider) =>
@@ -42,7 +43,8 @@ export const supportedNetwork: {
   [NetworkCmdName.Mainnet]: {
     explorer: "https://etherscan.io",
     provider: defaultInfuraProvider("homestead"),
-    networkId: 1,
+	//provider: ethers.getDefaultProvider("homestead"),
+	networkId: 1,
     networkName: "homestead",
     currency: "ETH",
   },

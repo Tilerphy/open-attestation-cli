@@ -18,16 +18,16 @@ export const transferDocumentStoreOwnershipToWallet = async ({
   const wallet = await getWalletOrSigner({ network, ...rest });
   if (dryRun) {
     const documentStore = await DocumentStoreFactory.connect(address, wallet);
-    await dryRunMode({
-      estimatedGas: await documentStore.estimateGas.transferOwnership(newOwner),
-      network,
-    });
+    //await dryRunMode({
+    //  estimatedGas: await documentStore.estimateGas.transferOwnership(newOwner),
+    //  network,
+    //});
     process.exit(0);
   }
 
   signale.await(`Sending transaction to pool`);
   const documentStore = await DocumentStoreFactory.connect(address, wallet);
-  await documentStore.callStatic.transferOwnership(newOwner);
+  //await documentStore.callStatic.transferOwnership(newOwner);
   const transaction = await documentStore.transferOwnership(newOwner);
   trace(`Tx hash: ${transaction.hash}`);
   trace(`Block Number: ${transaction.blockNumber}`);
