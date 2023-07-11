@@ -2,6 +2,22 @@
 
 This CLI tool in the [Open Attestation CLI](https://github.com/Open-Attestation/open-attestation-cli) repository turns .json documents into any open-attestation verifiable documents. It applies the OpenAttestation algorithm to produce a hash of the json document and then creates a file with the data and proof of integrity.
 
+## Why Fork and what is changed?
+
+1. Update some Nodejs library.
+2. Change default ethers provider from Infura to Alchemy.
+3. Add `apiKey` option for document-store issue / document-store revoke / deploy document-store, in order to provide an apiKey while doing these three commands. You can get an `apiKey` after registration at Alchemy.
+ 
+Example:
+```
+open-attestation-cli.exe document-store revoke --hash 0xd1bxxx --apiKey asdasdfasdas --address 0xb01xxx --encrypted-wallet-path wallet.json
+```
+
+# WARNING：
+
+1. This fork is a rude change, all unit-tests had been deleted.
+2. This is not an official repo.
+
 ## Installation
 
 ### Binary
