@@ -13,9 +13,10 @@ export const issueToDocumentStore = async ({
   hash,
   network,
   dryRun,
+  apiKey,
   ...rest
-}: DocumentStoreIssueCommand): Promise<TransactionReceipt> => {
-  const wallet = await getWalletOrSigner({ network, ...rest });
+}: DocumentStoreIssueCommand & {apiKey?: string}): Promise<TransactionReceipt> => {
+  const wallet = await getWalletOrSigner({ network, apiKey, ...rest });
   if (dryRun) {
     const documentStore = await DocumentStoreFactory.connect(address, wallet);
     await dryRunMode({

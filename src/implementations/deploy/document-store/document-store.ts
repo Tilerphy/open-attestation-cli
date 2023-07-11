@@ -12,10 +12,11 @@ export const deployDocumentStore = async ({
   owner,
   network,
   dryRun,
+  apiKey,
   passedOnWallet, // passedOnWallet variable will only be used if we are calling it from create.
   ...rest
-}: DeployDocumentStoreCommand): Promise<{ contractAddress: string }> => {
-  const wallet = passedOnWallet ? passedOnWallet : await getWalletOrSigner({ network, ...rest });
+}: DeployDocumentStoreCommand& {apiKey? : string}): Promise<{ contractAddress: string }> => {
+  const wallet = passedOnWallet ? passedOnWallet : await getWalletOrSigner({ network, apiKey, ...rest });
   const ownerAddress = owner ?? (await wallet.getAddress());
   if (dryRun) {
     await dryRunMode({

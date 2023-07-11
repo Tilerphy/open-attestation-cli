@@ -32,7 +32,7 @@ export const builder = (yargs: Argv): Argv =>
         description: "Display more details",
       })
   );
-export const handler = async ({ document, network, verbose }: VerifyCommand): Promise<void> => {
+export const handler = async ({ document, network, verbose, apiKey }: VerifyCommand): Promise<void> => {
   const show = (status: boolean, successMessage: string, errorMessage: string): void => {
     if (status) {
       signale.success(successMessage);
@@ -43,7 +43,7 @@ export const handler = async ({ document, network, verbose }: VerifyCommand): Pr
   try {
     signale.await(`Verifying ${document}`);
     const verify = verificationBuilder([...openAttestationVerifiers, openAttestationDidIdentityProof], {
-      provider: getSupportedNetwork(network).provider(),
+      provider: getSupportedNetwork(network, apiKey).provider(),
     });
     const fragments = await verify(readOpenAttestationFile(document));
     show(isValid(fragments), "The document is valid", "The document is not valid");

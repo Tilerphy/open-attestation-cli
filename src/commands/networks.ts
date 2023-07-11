@@ -23,7 +23,6 @@ const defaultInfuraProvider =
   (networkName: string): (() => providers.Provider) =>
   () =>
 	new providers.AlchemyProvider(networkName, "");
-    //new providers.InfuraProvider(networkName, "");
 
 const jsonRpcProvider =
   (url: string): (() => providers.Provider) =>
@@ -78,6 +77,10 @@ export const supportedNetwork: {
   },
 };
 
-export const getSupportedNetwork = (networkCmdName: string): SupportedNetwork => {
-  return supportedNetwork[networkCmdName as NetworkCmdName];
+export const getSupportedNetwork = (networkCmdName: string, apiKey:string): SupportedNetwork => {
+
+	let result =  supportedNetwork[networkCmdName as NetworkCmdName];
+	let instance = new providers.AlchemyProvider(result.networkName, apiKey);    
+	result.provider = ()=>instance; 
+	return result;
 };

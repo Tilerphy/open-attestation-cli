@@ -28,10 +28,16 @@ export const builder = (yargs: Argv): Argv =>
           type: "string",
           demandOption: true,
         })
+		.option("apiKey", {
+            alias:"A",
+            description: "Alchemy apiKey",
+            type: "string",
+            demandOption: false
+        })
     )
   );
 
-export const handler = async (args: DocumentStoreRevokeCommand): Promise<string | undefined> => {
+export const handler = async (args: DocumentStoreRevokeCommand & {apiKey?: string}): Promise<string | undefined> => {
   trace(`Args: ${JSON.stringify(args, null, 2)}`);
   try {
     info(`Revoking ${args.hash} to document store ${args.address}`);

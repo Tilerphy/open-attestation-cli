@@ -42,7 +42,7 @@ export const isWalletOption = (option: any): option is WalletOption => {
   return typeof option?.encryptedWalletPath === "string";
 };
 
-export type WalletOrSignerOption = Partial<PrivateKeyOption> | Partial<AwsKmsSignerOption> | Partial<WalletOption>;
+export type WalletOrSignerOption =  Partial<PrivateKeyOption> | Partial<AwsKmsSignerOption> | Partial<WalletOption>;
 
 export interface GasOption {
   dryRun: boolean;

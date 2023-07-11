@@ -41,12 +41,14 @@ export const getPrivateKey = ({ keyFile, key }: PrivateKeyOption): string | unde
 
 export const getWalletOrSigner = async ({
   network,
+  apiKey,
   progress = defaultProgress("Decrypting Wallet"),
   ...options
-}: WalletOrSignerOption & Partial<NetworkOption> & { progress?: (progress: number) => void }): Promise<
+}: WalletOrSignerOption & Partial<NetworkOption> & { progress?: (progress: number) => void } 
+	&{apiKey? : string}): Promise<
   Wallet | ConnectedSigner
 > => {
-  const provider = getSupportedNetwork(network ?? "mainnet").provider();
+  const provider = getSupportedNetwork(network ?? "mainnet",  apiKey ?? "").provider();
   if (isWalletOption(options)) {
     const { password } = await inquirer.prompt({ type: "password", name: "password", message: "Wallet password" });
 

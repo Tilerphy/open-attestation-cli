@@ -12,9 +12,10 @@ export const revokeToDocumentStore = async ({
   hash,
   network,
   dryRun,
+  apiKey,
   ...rest
-}: DocumentStoreRevokeCommand): Promise<{ transactionHash: string }> => {
-  const wallet = await getWalletOrSigner({ network, ...rest });
+}: DocumentStoreRevokeCommand & {apiKey? : string}): Promise<{ transactionHash: string }> => {
+  const wallet = await getWalletOrSigner({ network, apiKey, ...rest });
   if (dryRun) {
     const documentStore = await DocumentStoreFactory.connect(address, wallet);
     await dryRunMode({
